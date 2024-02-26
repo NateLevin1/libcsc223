@@ -74,3 +74,94 @@ void clist_insert_in_order(Node** list, Node** newnode) {
     (*newnode)->next = cur;
     prev->next = *newnode;
 }
+
+void insert_at_end(Node** list, Node** newnode) {
+    // If the list is empty, make the new node the head of the list
+    if (*list == NULL) {
+        *list = *newnode;
+    } else {
+        // Traverse the list to find the last node
+        Node* current = *list;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        // Insert the new node at the end of the list
+        current->next = *newnode;
+    }
+}
+
+Node* remove_from_clist(Node** list, int val) {
+    Node *current, *previous;
+    previous = *list;
+
+    // If the list is empty, return NULL
+    if (previous == NULL) {     
+        return NULL;
+    }
+
+    current = previous->next;
+
+    // If list contains only one node
+    if (previous->next == previous && previous->val == val) {
+        *list = NULL;
+        free(previous);
+        return previous;
+    }
+
+    // Traverse the list until either the end is reached or the value to be removed is found
+    while (current != *list && current->val != val) {
+        previous = current;
+        current = current->next;
+    }
+
+    // If the value to be removed is not found in the list return NULL
+    if (current == *list && current->val != val) { // Value not found
+        return NULL;
+    }
+
+    // If node to be removed is the head of the list
+    if (current == *list) {
+        previous->next = current->next;
+        *list = previous->next;
+    } else { // If node to be removed is not the head of the list
+        previous->next = current->next;
+    }
+
+    free(current);
+    return current;
+}
+
+void clist_insert_at_index(Node** list, int val, int index) {
+    Node* new_node = make_node(val);
+
+    if (*list == NULL) { // If the list is empty, insert the node as the only node
+        *list = new_node;
+        new_node->next = new_node; // Circular reference to itself
+        return;
+    }
+
+    if (index <= 0) { // Insert at the beginning of the list
+        Node* last_node = *list;
+        while (last_node->next != *list) {
+            last_node = last_node->next;
+        }
+        last_node->next = new_node;
+        new_node->next = *list;
+        *list = new_node;
+        return;
+    }
+
+    // Traverse the list to find the node at the specified index
+    Node* current = *list;
+    for (int i = 0; i < index - 1; i++) {
+        current = current->next;
+        if (current == *list) {
+            printf("Index out of range\n");
+            return;
+        }
+    }
+
+    // Insert the node at the specified index
+    new_node->next = current->next;
+    current->next = new_node;
+}
