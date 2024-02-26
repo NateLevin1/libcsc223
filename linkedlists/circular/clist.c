@@ -74,3 +74,16 @@ void clist_insert_in_order(Node** list, Node** newnode) {
     (*newnode)->next = cur;
     prev->next = *newnode;
 }
+    int clist_length(Node* head)
+    {
+        Node* ptr = head;
+        int result = 0;
+        if (ptr != NULL) {
+            do {
+                ptr = ptr->next;
+                result++;
+            } while (ptr != head);
+        }
+    
+        return result;
+    }
