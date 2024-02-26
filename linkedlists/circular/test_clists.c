@@ -50,6 +50,25 @@ int main() {
         clist_insert_in_order(&myclist, &n);
         RETURNS_STR(print_clist, "2 -> 3 -> 4 -> 5", (myclist));
     }
+  
+    TEST("Can get list length") {
+        Node* myclist = NULL;
+        RETURNS_INT(clist_length, 0, (myclist));
+
+        myclist = make_node(1);
+        myclist->next = myclist;
+        RETURNS_INT(clist_length, 1, (myclist));
+
+        Node* two = make_node(2);
+        two->next = myclist;
+        myclist->next = two;
+
+        Node* n = make_node(1024);
+        n->next = myclist;
+        two->next = n;
+
+        RETURNS_INT(clist_length, 3, (myclist));
+    }
 
     TEST("Can remove node from circular linked list") {
         Node* mylist = NULL;
