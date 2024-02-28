@@ -3,8 +3,7 @@
 #include <ctest.h>
 #include "dlist.h"
 
-int main()
-{
+int main() {
     BEGIN_TESTING("dlist.h");
 
     TEST("Can create dnode") {
@@ -14,7 +13,7 @@ int main()
         ASSERT_EQ(dn->prev, NULL);
     }
 
-        TEST("Can remove node from dlist") {
+    TEST("Can remove node from dlist") {
         // Create a doubly linked list with three nodes: 1 <-> 2 <-> 3
         Dnode* head = make_dnode(1);
         Dnode* node2 = make_dnode(2);
@@ -57,66 +56,20 @@ int main()
         free(head);
     }
 
-/*
-    TEST("Can print dlist") {
-        Dnode* mydlist = NULL;
-        RETURNS_STR(print_dlist, "", (mydlist));
+    TEST("Can find in dlist") {
+        // Create a doubly linked list: 1 <-> 3 <-> 5
+        Dnode* head = make_dnode(1);
+        dlist_insert_at_index(&head, 1, 3);
+        dlist_insert_at_index(&head, 2, 5);
 
-        mydlist = make_dnode(6);
-        mydlist->next = mydlist;
-        RETURNS_STR(print_dlist, "6", (mydlist));
+        // Should find 3, 5, and 1 in the list
+        ASSERT_EQ(find_in_dlist(head, 3)->val, 3);
+        ASSERT_EQ(find_in_dlist(head, 5)->val, 5);
+        ASSERT_EQ(find_in_dlist(head, 1)->val, 1);
 
-        Node* two = make_dnode(4);
-        two->next = mydlist;
-        mydlist->next = two;
-
-        Node* n = make_dnode(1024);
-        n->next = mydlist;
-        two->next = n;
-
-        RETURNS_STR(print_dlist, "1 -> 2 -> 1024", (mydlist));
+        // Shouldn't find 7
+        ASSERT_EQ(find_in_dlist(head, 7), NULL);
     }
-
-    TEST("Can insert node in order in descending list") {
-        // Confirm works with empty list
-        Node* mydlist = NULL;
-
-        Node* n = make_dnode(4);
-        clist_insert_in_order(&mydlist, &n);
-        RETURNS_STR(print_dlist, "4", (mydlist));
-
-        n = make_dnode(2);
-        clist_insert_in_order(&mydlist, &n);
-        RETURNS_STR(print_dlist, "2 -> 4", (mydlist));
-
-        n = make_dnode(3);
-        clist_insert_in_order(&mydlist, &n);
-        RETURNS_STR(print_dlist, "2 -> 3 -> 4", (mydlist));
-
-        n = make_dnode(5);
-        clist_insert_in_order(&mydlist, &n);
-        RETURNS_STR(print_dlist, "2 -> 3 -> 4 -> 5", (mydlist));
-    }
-
-    TEST("Can add node to empty clist") {
-        Node* mydlist = NULL;
-        Node* n = make_dnode(2);
-        clist_clist_insert_in_order(&mydlist, &n);
-        ASSERT_EQ(mydlist->val, 2);
-        ASSERT_EQ(mydlist->next, mydlist);
-    }
-
-    TEST("Can add node to clist with one node") {
-        Node* mydlist = NULL;
-        Node* n = make_dnode(2);
-        clist_clist_insert_in_order(&mydlist, &n);
-        n = make_dnode(1);
-        clist_clist_insert_in_order(&mydlist, &n);
-        ASSERT_EQ(mydlist->val, 1);
-        ASSERT_EQ(mydlist->next->val, 2);
-        ASSERT_EQ(mydlist->next->next, mydlist);
-    }
-*/
 
     END_TESTING();
 }

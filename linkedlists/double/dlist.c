@@ -3,8 +3,7 @@
 #include "dlist.h"
 
 
-Dnode* make_dnode(int data)
-{
+Dnode* make_dnode(int data) {
     Dnode* new = malloc(sizeof(Dnode));
     if (new == NULL) {
         printf("Memory allocation failed\n");
@@ -12,7 +11,7 @@ Dnode* make_dnode(int data)
     }
     new->val = data;
     new->next = NULL;
-    new->prev= NULL;
+    new->prev = NULL;
 
     return new;
 }
@@ -38,13 +37,13 @@ void remove_from_dlist(Dnode** head_ref, Dnode* del_node) {
     free(del_node);
 }
 
-void dlist_insert_at_index(Dnode **head_ref, int index, int val) {
+void dlist_insert_at_index(Dnode** head_ref, int index, int val) {
     // Check if index is negative
     if (index < 0)
         return;
 
     // Create a new node with the given value
-    Dnode *new_node = make_dnode(val);
+    Dnode* new_node = make_dnode(val);
     if (new_node == NULL) {
         // Memory allocation failed
         fprintf(stderr, "Memory allocation failed\n");
@@ -61,7 +60,7 @@ void dlist_insert_at_index(Dnode **head_ref, int index, int val) {
     }
 
     // Traverse to the node at position (index - 1)
-    Dnode *current = *head_ref;
+    Dnode* current = *head_ref;
     int i;
     for (i = 0; current != NULL && i < index - 1; i++)
         current = current->next;
@@ -76,6 +75,17 @@ void dlist_insert_at_index(Dnode **head_ref, int index, int val) {
     if (current->next != NULL)
         current->next->prev = new_node;
     current->next = new_node;
+}
+
+Dnode* find_in_dlist(Dnode* list, int target) {
+    Dnode* current = list;
+
+    for (Dnode* current = list; current != NULL; current = current->next) {
+        if (current->val == target) {
+            return current;
+        }
+    }
+    return NULL;
 }
 
 /*
