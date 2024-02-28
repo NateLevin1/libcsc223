@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "dlist.h"
 
-Node* make_node(int data) {
-    Node* new = malloc(sizeof(Node));
+Dnode* make_dnode(int data) {
+    Dnode* new = malloc(sizeof(Dnode));
     if (new == NULL) {
         printf("Memory allocation failed\n");
         exit(1);
@@ -14,16 +14,16 @@ Node* make_node(int data) {
     return new;
 }
 
-char* print_dlist(Node* head) {
+char* print_dlist(Dnode* head) {
     char* result = malloc(1024);
 
     int index = 0;
-    Node* node = head;
-    while (node != NULL) {
-        int num_len = snprintf(NULL, 0, "%d", node->val);
-        snprintf(result + index, 8, "%d", node->val);
+    Dnode* Dnode = head;
+    while (Dnode != NULL) {
+        int num_len = snprintf(NULL, 0, "%d", Dnode->val);
+        snprintf(result + index, 8, "%d", Dnode->val);
         index += num_len - 1;
-        if (node->next != NULL) {
+        if (Dnode->next != NULL) {
             result[++index] = ' ';
             result[++index] = '-';
             result[++index] = '>';
@@ -31,17 +31,45 @@ char* print_dlist(Node* head) {
         }
         index++;
 
-        node = node->next;
+        Dnode = Dnode->next;
     }
     result[index] = '\0';
 
     return result;
 }
 
-void dlist_insert_in_order(Node** head_ref, Node* newNode){
-    if(*head_ref == NULL){
-        *head_ref = newNode;
+void dlist_insert_in_order(Dnode** list, Dnode** newDnode){
+
+    Dnode* current;
+
+    if(*list == NULL){
+        *list = newDnode;
     }
 
-    if(*head_ref->data >= newNode->data)
-}
+    else if((*list)->next >= (*newDnode)->val){
+        newDnode->next = *list;
+        newDnode->next->prev = newDnode;
+        *list = newDnode;
+    }
+
+    else { 
+        current = *list; 
+  
+        // locate the node after which the new node 
+        // is to be inserted 
+        while (current->next != NULL &&  
+               current->next->val < newDnode->data) 
+            current = current->next; 
+  
+        /* Make the appropriate links */
+        newDnode->next = current->next; 
+  
+        // if the new node is not inserted 
+        // at the end of the list 
+        if (current->next != NULL) 
+            newDnode->next->prev = newDnode; 
+  
+        current->next = newDnode; 
+        newDnode->prev = current; 
+    } 
+} 

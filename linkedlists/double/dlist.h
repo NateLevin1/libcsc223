@@ -1,6 +1,7 @@
-typedef struct node {
+typedef struct dnode {
     int val;
-    struct node* next;
-} Node;
+    struct dnode* next;
+    struct dnode* prev;
+} Dnode;
 
-Node* make_node(int);
+Dnode* make_dnode(int);
