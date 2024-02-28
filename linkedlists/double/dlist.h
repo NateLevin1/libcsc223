@@ -6,6 +6,8 @@ typedef struct dnode {
 
 Dnode* make_dnode(int);
 char* print_dlist(Dnode*);
+void remove_from_dlist(Dnode**, Dnode*);
+void dlist_insert_at_index(Dnode **, int, int);
 /*
 void dlist_insert_in_order(Dnode**, Dnode**);
 int dlist_length(Dnode*);
