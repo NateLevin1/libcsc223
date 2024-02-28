@@ -37,3 +37,11 @@ char* print_dlist(Node* head) {
 
     return result;
 }
+
+void dlist_insert_in_order(Node** head_ref, Node* newNode){
+    if(*head_ref == NULL){
+        *head_ref = newNode;
+    }
+
+    if(*head_ref->data >= newNode->data)
+}
