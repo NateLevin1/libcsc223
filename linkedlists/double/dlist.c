@@ -44,34 +44,34 @@ void dlist_insert_in_order(Dnode** list, Dnode** newDnode){
     Dnode* current;
 
     if(*list == NULL){
-        *list = newDnode;
+        *list = (*newDnode);
     }
 
-    else if((*list)->next >= (*newDnode)->val){
+    else if((*list)->next->val >= (*newDnode)->val){
         (*newDnode)->next = *list;
-        (*newDnode)->next->prev = newDnode;
-        *list = newDnode;
+        (*newDnode)->next->prev = (*newDnode);
+        *list = (*newDnode);
     }
 
     else { 
-        current = *list; 
+        current = *list;
   
         // locate the node after which the new node 
         // is to be inserted 
         while (current->next != NULL &&  
                current->next->val < (*newDnode)->val) 
-            current = current->next; 
+            current = current->next;
   
         /* Make the appropriate links */
-        (*newDnode)->next = current->next; 
+        (*newDnode)->next = current->next;
   
         // if the new node is not inserted 
         // at the end of the list 
         if (current->next != NULL) 
-            (*newDnode)->next->prev = newDnode; 
+            (*newDnode)->next->prev = *newDnode;
   
-        current->next = newDnode; 
-        newDnode->prev = current; 
+        current->next = *newDnode;
+        (*newDnode)->prev = current;
     } 
 } 
 
