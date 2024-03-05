@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "dlist.h"
 
-
 Dnode* make_dnode(int data) {
     Dnode* new = malloc(sizeof(Dnode));
     if (new == NULL) {
@@ -88,28 +87,13 @@ Dnode* find_in_dlist(Dnode* list, int target) {
     return NULL;
 }
 
-/*
-char* print_list(Node* head) {
-    char* result = malloc(1024);
-
-    int index = 0;
-    Node* node = head;
-    while (node != NULL) {
-        int num_len = snprintf(NULL, 0, "%d", node->val);
-        snprintf(result + index, 8, "%d", node->val);
-        index += num_len - 1;
-        if (node->next != NULL) {
-            result[++index] = ' ';
-            result[++index] = '-';
-            result[++index] = '>';
-            result[++index] = ' ';
-        }
-        index++;
-
-        node = node->next;
-    }
-    result[index] = '\0';
-
-    return result;
-}
-*/
+int dlist_length(Dnode* head) 
+{ 
+  int count = 0; 
+  Dnode* temp = head;
+  while (temp != NULL) { 
+    count++; 
+    temp = temp->next; 
+  } 
+  return count; 
+}  
