@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "dlist.h"
 
-
 Dnode* make_dnode(int data) {
     Dnode* new = malloc(sizeof(Dnode));
     if (new == NULL) {
@@ -15,6 +14,7 @@ Dnode* make_dnode(int data) {
 
     return new;
 }
+
 void remove_from_dlist(Dnode** head_ref, Dnode* del_node) {
     // Base case: If the list is empty or del_node is NULL, return
     if (*head_ref == NULL || del_node == NULL)
@@ -86,6 +86,7 @@ Dnode* find_in_dlist(Dnode* list, int target) {
     }
     return NULL;
 }
+
 int dlist_length(Dnode* head) 
 { 
   int count = 0; 
