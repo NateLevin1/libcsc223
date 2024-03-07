@@ -72,14 +72,12 @@ int main() {
     }
 
     TEST("Can get list length") {
-        
         Dnode* head = make_dnode(1);
         dlist_insert_at_index(&head, 1, 3);
         dlist_insert_at_index(&head, 2, 5);
 
-       ASSERT_EQ(dlist_length(head),3); 
-
-
+        ASSERT_EQ(dlist_length(head), 3);
     }
+
     END_TESTING();
 }
