@@ -41,3 +41,12 @@ int pop(int input_array[], int top)
     }
     return top;
 }
+
+int top(Stack *stack) {
+    if (stack->top == -1) {
+        printf("Stack is empty\n");
+        return -1; 
+    }
+
+    return stack->items[stack->top];
+}
