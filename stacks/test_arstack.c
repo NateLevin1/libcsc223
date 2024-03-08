@@ -36,5 +36,16 @@ int main() {
         free(stack);
     }
 
+
+
+    TEST("Can get the top element of the stack") {
+        Stack* stack = new();
+        push(10, stack);
+        push(20, stack);
+        ASSERT_EQ(top(stack), 20);
+        free(stack);
+    }
+
+
     END_TESTING();
 }
