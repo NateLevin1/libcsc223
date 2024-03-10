@@ -13,17 +13,17 @@ int main() {
     TEST("Can pop") {
         // Create stack of one element
         // After that single element is popped out, the stack should be null
-        StackNode* head = new_llstack(1);
-        ASSERT_EQ(llstack_pop(head),NULL);
-        // Create a stack of two elements
-        // LIFO, second node is popped out
-        StackNode* n = new_llstack(2);
-        head->next = n;
-        ASSERT_EQ(llstack_pop(head),head);
-        // Three-element stack
-        StackNode* n2 = new_llstack(3);
-        n2->next = head;
-        ASSERT_EQ(llstack_pop(head), n2);
+
+        StackNode* head = new_node(1);
+        ASSERT_EQ(llstack_pop(head), head->val);
+        ASSERT_EQ(head,NULL);
+
+        StackNode* n1 = new_node(1);
+        StackNode* n2 = new_node(2);
+        StackNode* n3 = new_node(3);
+        n1->next = n2;
+        n2->next = n3;
+        ASSERT_EQ(llstack_pop(n1),n1->val);
     }
 
     TEST("stack operations work") {
