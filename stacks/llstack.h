@@ -3,7 +3,10 @@ typedef struct node {
     struct node* next;
 } StackNode;
 
-StackNode* new_node(int);
-StackNode* pop(StackNode** stack);
-StackNode* top(StackNode** stack);
-void push(StackNode** stack, StackNode*);
+typedef StackNode* Stack;
+
+StackNode* new_llstack(int);
+int llstack_is_empty(StackNode** stack);
+int llstack_pop(StackNode** stack);
+int llstack_top(StackNode** stack);
+void llstack_push(StackNode** stack, int val);
