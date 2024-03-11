@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "llstack.h"
+#include <stdio.h>
 
-StackNode* new_node(int data) {
+StackNode* new_llstack_node(int data) {
     StackNode* new = malloc(sizeof(StackNode));
     if (new == NULL) {
         printf("Memory allocation failed\n");
@@ -12,10 +13,6 @@ StackNode* new_node(int data) {
     new->next = NULL;
 
     return new;
-}
-
-StackNode* new_llstack(int data) {
-    return new_node(data);
 }
 
 int llstack_is_empty(StackNode** stack) {
@@ -30,7 +27,6 @@ int llstack_pop(StackNode** stack) {
     StackNode* old_top = *stack;
     int old_top_val = old_top->val;
     *stack = old_top->next;
-    free(old_top);
     return old_top_val;
 }
 
@@ -39,7 +35,7 @@ int llstack_top(StackNode** stack) {
 }
 
 void llstack_push(StackNode** stack, int val) {
-    StackNode* node = new_node(val);
+    StackNode* node = new_llstack_node(val);
     if (stack == NULL || (*stack) == NULL) {
         *stack = node;
     } else {
