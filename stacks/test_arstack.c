@@ -36,8 +36,6 @@ int main() {
         free(stack);
     }
 
-
-
     TEST("Can get the top element of the stack") {
         Stack* stack = new();
         push(10, stack);
@@ -46,6 +44,12 @@ int main() {
         free(stack);
     }
 
+    TEST("can remove a node / pop")
+    {
+        int array[4] = {1, 2, 3};
+        int top_value = 3;
+        ASSERT_EQ(pop(array, top_value), 2);
+    }
 
     END_TESTING();
 }
