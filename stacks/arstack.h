@@ -7,3 +7,5 @@ typedef struct {
 
 Stack* new();
 void push(int, Stack*);
+
+int pop(int[], int);
