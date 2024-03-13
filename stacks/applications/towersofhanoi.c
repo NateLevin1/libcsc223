@@ -13,6 +13,8 @@ void move(int n, Stack* source, Stack* dest, Stack* spare) {
 }
 
 int main() {
+    BEGIN_TESTING("towersofhanoi.c");
+
     TEST("Towers of Hanoi") {
         Stack source = new_llstack_node(3);
         llstack_push(&source, 2);
@@ -27,4 +29,6 @@ int main() {
         ASSERT(llstack_is_empty(&spare));
         ASSERT_EQ(llstack_top(&dest), 1);
     }
+
+    END_TESTING();
 }
