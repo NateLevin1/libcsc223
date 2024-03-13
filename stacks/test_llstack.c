@@ -3,26 +3,26 @@
 
 int main() {
     BEGIN_TESTING("llstack.h");
-
-    TEST("Can create stack") {
+        TEST("Can create stack") {
         StackNode* n = new_llstack_node(1);
-        ASSERT_EQ(n->val,1);
-        ASSERT_EQ(n->next,NULL);
+        ASSERT_EQ(n->val, 1);
+        ASSERT_EQ(n->next, NULL);
     }
 
     TEST("Can pop") {
         // Create stack of one element
         // After that single element is popped out, the stack should be null
-        StackNode* head = new_llstack_node(1);
-        ASSERT_EQ(llstack_pop(&head), head->val);
-        // ASSERT_EQ(head, NULL);
+        Stack head = new_llstack_node(1);
+        // note: head->val is not accessible in the below assertion
+        //       because head will be freed by the pop
+        ASSERT_EQ(llstack_pop(&head), 1);
+        ASSERT_EQ(head, NULL);
 
-        // StackNode* n1 = new_llstack_node(2);
-        // StackNode* n2 = new_llstack_node(3);
-        // StackNode* n3 = new_llstack_node(4);
-        // n2 = n1->next;
-        // n3 = n2->next;
-        // ASSERT_EQ(llstack_pop(&n1), n1->val);
+        head = new_llstack_node(3);
+        llstack_push(&head, 2);
+        llstack_push(&head, 1);
+        ASSERT_EQ(llstack_pop(&head), 1);
+        ASSERT_EQ(llstack_top(&head), 2);
     }
 
     TEST("stack operations work") {
