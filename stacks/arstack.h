@@ -7,5 +7,5 @@ typedef struct {
 
 Stack* new();
 void push(int, Stack*);
-
+int top(Stack *stack);
 int pop(int[], int);
