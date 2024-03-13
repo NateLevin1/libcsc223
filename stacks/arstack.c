@@ -18,15 +18,6 @@ void push(int value, Stack* stack) {
     stack->items[++stack->top] = value;  // Increment top and then insert the value
 }
 
-int top(Stack *stack) {
-    if (stack->top == -1) {
-        printf("Stack is empty\n");
-        return -1; 
-    }
-
-    return stack->items[stack->top];
-}
-
 // takes in an array and the index of the "top" of the array
 int pop(int input_array[], int top)
 {
