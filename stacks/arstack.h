@@ -9,3 +9,4 @@ Stack* arstack_new();
 void arstack_push(int, Stack*);
 int arstack_top(Stack *stack);
 int arstack_pop(int[], int);
+int arstack_is_empty(Stack *stack);
