@@ -36,6 +36,15 @@ int main() {
         free(stack);
     }
 
+    // Test case 4: Can check if stack is empty
+    TEST("Can check if stack is empty") {
+        Stack* empty_stack = arstack_new();
+        ASSERT_EQ(arstack_is_empty(empty_stack), 1); // Stack is empty initially
+        arstack_push(10, empty_stack);
+        ASSERT_EQ(arstack_is_empty(empty_stack), 0); // Stack is not empty after pushing an element
+        free(empty_stack);
+    }
+
     TEST("can remove a node / pop")
     {
         int array[4] = {1, 2, 3};

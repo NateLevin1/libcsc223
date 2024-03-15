@@ -41,3 +41,8 @@ int arstack_top(Stack *stack) {
 
     return stack->items[stack->top];
 }
+
+// Function to check if the stack is empty
+int arstack_is_empty(Stack *stack) {
+    return (stack->top == -1);  // Returns 1 if stack is empty, 0 otherwise
+}
