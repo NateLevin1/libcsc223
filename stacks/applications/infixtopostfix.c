@@ -52,7 +52,7 @@ void infixToPostfix(char* infix, char* postfix) {
             }
         }
         // If the token is an operator
-        else { 
+        else {
             // Pop operators from the stack with higher or equal precedence and append to postfix
             while (!llstack_is_empty(&stack) && llstack_top(&stack) != '(' && precedence(token) <= precedence(llstack_top(&stack))) {
                 popped = llstack_pop(&stack);
@@ -82,5 +82,4 @@ int main() {
     }
 
     END_TESTING();
-
 }

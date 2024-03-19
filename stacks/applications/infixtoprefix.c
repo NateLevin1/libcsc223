@@ -39,6 +39,7 @@ int precedence(char op) {
 // Function to convert infix expression to prefix expression
 void infixToPrefix(char* infix, char* prefix) {
     StackNode* stack = NULL; // Initialize an empty stack
+
     int i = 0, j = 0;
     char token, popped;
 

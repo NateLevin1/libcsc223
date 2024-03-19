@@ -5,7 +5,8 @@ typedef struct {
     int top;
 } Stack;
 
-Stack* new();
-void push(int, Stack*);
-
-int pop(int[], int);
+Stack* arstack_new();
+void arstack_push(int, Stack*);
+int arstack_top(Stack *stack);
+int arstack_pop(int[], int);
+int arstack_is_empty(Stack *stack);
