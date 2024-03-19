@@ -4,6 +4,7 @@
 #include <ctest.h>
 #include "../llstack.h"
 
+// Function to reverse a given string
 void reverseString(char* str) {
     int i = 0, j = strlen(str) - 1;
     while (i < j) {
@@ -15,10 +16,12 @@ void reverseString(char* str) {
     }
 }
 
+// Function to check if a character is an operand (alphabet)
 int isOperand(char c) {
     return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
 }
 
+// Function to determine precedence of operators
 int precedence(char op) {
     switch (op) {
         case '+':
@@ -29,12 +32,14 @@ int precedence(char op) {
         case '%':
             return 2;
         default:
-            return 0;
+            return 0; // Default precedence for other characters
     }
 }
 
+// Function to convert infix expression to prefix expression
 void infixToPrefix(char* infix, char* prefix) {
-    StackNode* stack = NULL;
+    StackNode* stack = NULL; // Initialize an empty stack
+
     int i = 0, j = 0;
     char token, popped;
 
@@ -47,48 +52,62 @@ void infixToPrefix(char* infix, char* prefix) {
     // Concatenate a left parenthesis '(' to the infix expression
     strcat(infix, "(");
 
+    // Iterate through each character of the infix expression
     while (infix[i] != '\0') {
         token = infix[i];
 
+        // If the current token is ')', push it onto the stack
         if (token == ')') {
             llstack_push(&stack, token);
-        } else if (isOperand(token)) {
+        }
+        // If the token is an operand (alphabet), add it to the prefix expression
+        else if (isOperand(token)) {
             prefix[j++] = token;
-        } else if (token == '(') {
+        }
+        // If the token is '(', pop operators from the stack until ')' is encountered
+        else if (token == '(') {
             while ((popped = llstack_pop(&stack)) != ')') {
                 prefix[j++] = popped;
             }
-        } else { // token is an operator
+        }
+        // If the token is an operator
+        else { 
+            // Pop operators from the stack with higher precedence and append to prefix
             while (!llstack_is_empty(&stack) && precedence(token) < precedence(llstack_top(&stack))) {
                 popped = llstack_pop(&stack);
                 prefix[j++] = popped;
             }
+            // Push the current operator onto the stack
             llstack_push(&stack, token);
         }
-        i++;
+        i++; // Move to the next character in the infix expression
     }
 
     // Add null terminator to the prefix expression
     prefix[j] = '\0';
 
-    // Reverse the prefix expression
+    // Reverse the prefix expression to get the final prefix expression
     reverseString(prefix);
 }
 
 
 int main() {
-    BEGIN_TESTING("infixtoprefix.c.c");
+    // Test case using CTest framework
+    BEGIN_TESTING("infixtoprefix.c");
 
+    // Test for converting infix expression to prefix
     TEST("Converts infix expression to prefix") {
         char infix[] = "(A+B)(CD)";
-        char expected_postfix[] = "+ABCD";
+        char expected_prefix[] = "+ABCD";
 
-        char postfix[100];
-        infixToPrefix(infix, postfix);
+        char prefix[100];
+        infixToPrefix(infix, prefix);
 
-        ASSERT_STR_EQ(postfix, expected_postfix);
+        // Assertion to check if the obtained prefix expression matches the expected one
+        ASSERT_STR_EQ(prefix, expected_prefix);
     }
 
-    END_TESTING();
+    END_TESTING(); // End testing
 
+    return 0;
 }
