@@ -1,8 +1,7 @@
 #include <ctest.h>
 #include "../llstack.h"
 
-bool isBalanced(char exp[])
-{
+bool isBalanced(char exp[]) {
     bool flag = true;
     int count = 0;
 
@@ -10,8 +9,7 @@ bool isBalanced(char exp[])
 
         if (exp[i] == '(') {
             count++;
-        }
-        else {
+        } else {
             count--;
         }
         if (count < 0) {
@@ -26,17 +24,15 @@ bool isBalanced(char exp[])
     return flag;
 }
 
-int main(){
+int main() {
     BEGIN_TESTING("parenschecker.c");
 
-    TEST("isBalanced"){
-        ASSERT_EQ(isBalanced("()"),  true);
+    TEST("isBalanced") {
+        ASSERT_EQ(isBalanced("()"), true);
         ASSERT_EQ(isBalanced("()("), false);
         ASSERT_EQ(isBalanced("()()"), true);
         ASSERT_EQ(isBalanced("([)]"), false);
         ASSERT_EQ(isBalanced("{[]}"), false);
-
-        printf("All tests passed successfully!\n");
     }
 
     END_TESTING();
