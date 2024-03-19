@@ -4,7 +4,7 @@
 #include <ctest.h>
 #include "../llstack.h"
 
-// Function to reverse a string
+// Function to reverse a given string
 void reverseString(char* str) {
     int i = 0, j = strlen(str) - 1;
     while (i < j) {
