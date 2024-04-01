@@ -43,4 +43,3 @@ void llstack_push(StackNode** stack, int val) {
         *stack = node;
     }
 }
-
