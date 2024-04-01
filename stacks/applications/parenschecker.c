@@ -2,26 +2,28 @@
 #include "../llstack.h"
 
 bool isBalanced(char exp[]) {
-    bool flag = true;
-    int count = 0;
+    Stack stack = NULL;
 
     for (int i = 0; exp[i] != '\0'; i++) {
+        char ch = exp[i];
+        if (ch == '(' || ch == '[' || ch == '{') {
+            llstack_push(&stack, ch);
+        } else if (ch == ')' || ch == ']' || ch == '}') {
+            if (llstack_is_empty(&stack)) return false;
 
-        if (exp[i] == '(') {
-            count++;
-        } else {
-            count--;
+            char popped = llstack_pop(&stack);
+            if (
+                (ch == ')' && popped != '(')
+                || (ch == ']' && popped != '[')
+                || (ch == '}' && popped != '{')
+                ) {
+                return false;
+            }
         }
-        if (count < 0) {
-            flag = false;
-            break;
-        }
-    }
-    if (count != 0) {
-        flag = false;
+
     }
 
-    return flag;
+    return llstack_is_empty(&stack);
 }
 
 int main() {
@@ -32,7 +34,8 @@ int main() {
         ASSERT_EQ(isBalanced("()("), false);
         ASSERT_EQ(isBalanced("()()"), true);
         ASSERT_EQ(isBalanced("([)]"), false);
-        ASSERT_EQ(isBalanced("{[]}"), false);
+        ASSERT_EQ(isBalanced("{[]}"), true);
+        ASSERT_EQ(isBalanced(")("), false);
     }
 
     END_TESTING();
