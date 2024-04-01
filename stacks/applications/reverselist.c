@@ -2,11 +2,11 @@
 #include "../llstack.h"
 
 void main(StackNode** list) {
-    Stack* stack = new_llstack_node(1);
+    Stack* stack;
     StackNode* temp = *list;
 
     while (temp != NULL){
-        llstack_push(stack, temp->val);
+        llstack_push(&stack, temp->val);
         temp = temp->next;
     }
 
