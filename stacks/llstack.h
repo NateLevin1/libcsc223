@@ -1,8 +1,6 @@
-typedef struct node {
-    int val;
-    struct node* next;
-} StackNode;
+#include "../linkedlists/single/list.h"
 
+typedef Node StackNode;
 typedef StackNode* Stack;
 
 StackNode* new_llstack_node(int);
