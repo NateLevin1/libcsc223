@@ -3,14 +3,14 @@
 #include "arstack.h"
 
 // Function to create a new stack
-Stack* new() {
+Stack* arstack_new() {
     Stack* stack = (Stack*)malloc(sizeof(Stack));
     stack->top = -1;  // Initialize top index to -1 to indicate an empty stack
     return stack;
 }
 
 // Function to push an element onto the stack
-void push(int value, Stack* stack) {
+void arstack_push(int value, Stack* stack) {
     if (stack->top == MAX_SIZE - 1) {
         printf("Stack Overflow: Cannot push element onto a full stack\n");
         return;
@@ -19,7 +19,7 @@ void push(int value, Stack* stack) {
 }
 
 // takes in an array and the index of the "top" of the array
-int pop(int input_array[], int top)
+int arstack_pop(int input_array[], int top)
 {
     if (top <= 0)
     {
@@ -31,4 +31,18 @@ int pop(int input_array[], int top)
         top = top - 1;
     }
     return top;
+}
+
+int arstack_top(Stack *stack) {
+    if (stack->top == -1) {
+        printf("Stack is empty\n");
+        return -1; 
+    }
+
+    return stack->items[stack->top];
+}
+
+// Function to check if the stack is empty
+int arstack_is_empty(Stack *stack) {
+    return (stack->top == -1);  // Returns 1 if stack is empty, 0 otherwise
 }
